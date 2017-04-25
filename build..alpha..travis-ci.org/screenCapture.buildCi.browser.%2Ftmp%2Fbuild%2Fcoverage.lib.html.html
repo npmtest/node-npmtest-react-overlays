@@ -1,0 +1,2047 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-react-overlays/node_modules/react-overlays/lib/Modal.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-react-overlays">npmtest-react-overlays (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-react-overlays/node_modules/react-overlays/lib/Modal.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">29.41% <small>(65 / 221)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">12.12% <small>(16 / 132)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">16.67% <small>(6 / 36)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">24.74% <small>(47 / 190)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-react-overlays/node_modules/react-overlays/lib/</a> » Modal.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+&nbsp;
+var _extends = Object.assign || <span class="fstat-no" title="function not covered"><span class="branch-1 cbranch-no" title="branch not covered">function (target) {</span> <span class="cstat-no" title="statement not covered">for (var i = 1; i &lt; arguments.length; i++) { <span class="cstat-no" title="statement not covered">var source = arguments[i]; <span class="cstat-no" title="statement not covered"></span>for (var key in source) { <span class="cstat-no" title="statement not covered">if (Object.prototype.hasOwnProperty.call(source, key)) { <span class="cstat-no" title="statement not covered">target[key] = source[key]; </span>} </span>} </span>} <span class="cstat-no" title="statement not covered"></span>return target; </span>};</span>
+&nbsp;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; <span class="missing-if-branch" title="else path not taken">E</span>if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { <span class="missing-if-branch" title="else path not taken">E</span>if (protoProps) defineProperties(Constructor.prototype, protoProps); <span class="missing-if-branch" title="if path not taken">I</span>if (staticProps) <span class="cstat-no" title="statement not covered">defineProperties(Constructor, staticProps); </span>return Constructor; }; }();
+&nbsp;
+var _react = require('react');
+&nbsp;
+var _react2 = _interopRequireDefault(_react);
+&nbsp;
+var _propTypes = require('prop-types');
+&nbsp;
+var _propTypes2 = _interopRequireDefault(_propTypes);
+&nbsp;
+var _warning = require('warning');
+&nbsp;
+var _warning2 = _interopRequireDefault(_warning);
+&nbsp;
+var _componentOrElement = require('react-prop-types/lib/componentOrElement');
+&nbsp;
+var _componentOrElement2 = _interopRequireDefault(_componentOrElement);
+&nbsp;
+var _elementType = require('react-prop-types/lib/elementType');
+&nbsp;
+var _elementType2 = _interopRequireDefault(_elementType);
+&nbsp;
+var _Portal = require('./Portal');
+&nbsp;
+var _Portal2 = _interopRequireDefault(_Portal);
+&nbsp;
+var _ModalManager = require('./ModalManager');
+&nbsp;
+var _ModalManager2 = _interopRequireDefault(_ModalManager);
+&nbsp;
+var _ownerDocument = require('./utils/ownerDocument');
+&nbsp;
+var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
+&nbsp;
+var _addEventListener = require('./utils/addEventListener');
+&nbsp;
+var _addEventListener2 = _interopRequireDefault(_addEventListener);
+&nbsp;
+var _addFocusListener = require('./utils/addFocusListener');
+&nbsp;
+var _addFocusListener2 = _interopRequireDefault(_addFocusListener);
+&nbsp;
+var _inDOM = require('dom-helpers/util/inDOM');
+&nbsp;
+var _inDOM2 = _interopRequireDefault(_inDOM);
+&nbsp;
+var _activeElement = require('dom-helpers/activeElement');
+&nbsp;
+var _activeElement2 = _interopRequireDefault(_activeElement);
+&nbsp;
+var _contains = require('dom-helpers/query/contains');
+&nbsp;
+var _contains2 = _interopRequireDefault(_contains);
+&nbsp;
+var _getContainer = require('./utils/getContainer');
+&nbsp;
+var _getContainer2 = _interopRequireDefault(_getContainer);
+&nbsp;
+function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : { default: obj }; }
+&nbsp;
+<span class="fstat-no" title="function not covered">function _classCallCheck(instance, Constructor) {</span> <span class="cstat-no" title="statement not covered">if (!(instance instanceof Constructor)) { <span class="cstat-no" title="statement not covered">throw new TypeError("Cannot call a class as a function"); </span>} </span>}
+&nbsp;
+<span class="fstat-no" title="function not covered">function _possibleConstructorReturn(self, call) {</span> <span class="cstat-no" title="statement not covered">if (!self) { <span class="cstat-no" title="statement not covered">throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); </span>} <span class="cstat-no" title="statement not covered"></span>return call &amp;&amp; (typeof call === "object" || typeof call === "function") ? call : self; </span>}
+&nbsp;
+function _inherits(subClass, superClass) { <span class="missing-if-branch" title="if path not taken">I</span>if (typeof superClass !== "function" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered">superClass !== null)</span> { <span class="cstat-no" title="statement not covered">throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); </span>} subClass.prototype = Object.create(superClass &amp;&amp; superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); <span class="missing-if-branch" title="else path not taken">E</span>if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : <span class="branch-1 cbranch-no" title="branch not covered">subClass.__proto__ = superClass;</span> } /*eslint-disable react/prop-types */
+&nbsp;
+&nbsp;
+var modalManager = new _ModalManager2.default();
+&nbsp;
+/**
+ * Love them or hate them, `&lt;Modal/&gt;` provides a solid foundation for creating dialogs, lightboxes, or whatever else.
+ * The Modal component renders its `children` node in front of a backdrop component.
+ *
+ * The Modal offers a few helpful features over using just a `&lt;Portal/&gt;` component and some styles:
+ *
+ * - Manages dialog stacking when one-at-a-time just isn't enough.
+ * - Creates a backdrop, for disabling interaction below the modal.
+ * - It properly manages focus; moving to the modal content, and keeping it there until the modal is closed.
+ * - It disables scrolling of the page content while open.
+ * - Adds the appropriate ARIA roles are automatically.
+ * - Easily pluggable animations via a `&lt;Transition/&gt;` component.
+ *
+ * Note that, in the same way the backdrop element prevents users from clicking or interacting
+ * with the page content underneath the Modal, Screen readers also need to be signaled to not to
+ * interact with page content while the Modal is open. To do this, we use a common technique of applying
+ * the `aria-hidden='true'` attribute to the non-Modal elements in the Modal `container`. This means that for
+ * a Modal to be truly modal, it should have a `container` that is _outside_ your app's
+ * React hierarchy (such as the default: document.body).
+ */
+&nbsp;
+var Modal = function (_React$Component) {
+  _inherits(Modal, _React$Component);
+&nbsp;
+<span class="fstat-no" title="function not covered">  function Modal() {</span>
+<span class="cstat-no" title="statement not covered">    var _ref;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var _temp, _this, _ret;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _classCallCheck(this, Modal);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (var _len = arguments.length, args = Array(_len), _key = 0; _key &lt; _len; _key++) {</span>
+<span class="cstat-no" title="statement not covered">      args[_key] = arguments[_key];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Modal.__proto__ || Object.getPrototypeOf(Modal)).call.apply(_ref, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);</span>
+  }
+&nbsp;
+  _createClass(Modal, [{
+    key: 'omitProps',
+    value: <span class="fstat-no" title="function not covered">function omitProps(props, propTypes) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var keys = Object.keys(props);</span>
+<span class="cstat-no" title="statement not covered">      var newProps = {};</span>
+<span class="cstat-no" title="statement not covered">      keys.map(<span class="fstat-no" title="function not covered">function (prop) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (!Object.prototype.hasOwnProperty.call(propTypes, prop)) {</span>
+<span class="cstat-no" title="statement not covered">          newProps[prop] = props[prop];</span>
+        }
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered">      return newProps;</span>
+    }
+  }, {
+    key: 'render',
+    value: <span class="fstat-no" title="function not covered">function render() {</span>
+<span class="cstat-no" title="statement not covered">      var _props = this.props;</span>
+<span class="cstat-no" title="statement not covered">      var show = _props.show;</span>
+<span class="cstat-no" title="statement not covered">      var container = _props.container;</span>
+<span class="cstat-no" title="statement not covered">      var children = _props.children;</span>
+<span class="cstat-no" title="statement not covered">      var Transition = _props.transition;</span>
+<span class="cstat-no" title="statement not covered">      var backdrop = _props.backdrop;</span>
+<span class="cstat-no" title="statement not covered">      var dialogTransitionTimeout = _props.dialogTransitionTimeout;</span>
+<span class="cstat-no" title="statement not covered">      var className = _props.className;</span>
+<span class="cstat-no" title="statement not covered">      var style = _props.style;</span>
+<span class="cstat-no" title="statement not covered">      var onExit = _props.onExit;</span>
+<span class="cstat-no" title="statement not covered">      var onExiting = _props.onExiting;</span>
+<span class="cstat-no" title="statement not covered">      var onEnter = _props.onEnter;</span>
+<span class="cstat-no" title="statement not covered">      var onEntering = _props.onEntering;</span>
+<span class="cstat-no" title="statement not covered">      var onEntered = _props.onEntered;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var dialog = _react2.default.Children.only(children);</span>
+<span class="cstat-no" title="statement not covered">      var filteredProps = this.omitProps(this.props, Modal.propTypes);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var mountModal = show || Transition &amp;&amp; !this.state.exited;</span>
+<span class="cstat-no" title="statement not covered">      if (!mountModal) {</span>
+<span class="cstat-no" title="statement not covered">        return null;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var _dialog$props = dialog.props;</span>
+<span class="cstat-no" title="statement not covered">      var role = _dialog$props.role;</span>
+<span class="cstat-no" title="statement not covered">      var tabIndex = _dialog$props.tabIndex;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (role === undefined || tabIndex === undefined) {</span>
+<span class="cstat-no" title="statement not covered">        dialog = (0, _react.cloneElement)(dialog, {</span>
+          role: role === undefined ? 'document' : role,
+          tabIndex: tabIndex == null ? '-1' : tabIndex
+        });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (Transition) {</span>
+<span class="cstat-no" title="statement not covered">        dialog = _react2.default.createElement(</span>
+          Transition,
+          {
+            transitionAppear: true,
+            unmountOnExit: true,
+            'in': show,
+            timeout: dialogTransitionTimeout,
+            onExit: onExit,
+            onExiting: onExiting,
+            onExited: this.handleHidden,
+            onEnter: onEnter,
+            onEntering: onEntering,
+            onEntered: onEntered
+          },
+          dialog
+        );
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      return _react2.default.createElement(</span>
+        _Portal2.default,
+        {
+          ref: this.setMountNode,
+          container: container
+        },
+        _react2.default.createElement(
+          'div',
+          _extends({
+            ref: this.setModalNode,
+            role: role || 'dialog'
+          }, filteredProps, {
+            style: style,
+            className: className
+          }),
+          backdrop &amp;&amp; this.renderBackdrop(),
+          dialog
+        )
+      );
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: <span class="fstat-no" title="function not covered">function componentWillReceiveProps(nextProps) {</span>
+<span class="cstat-no" title="statement not covered">      if (nextProps.show) {</span>
+<span class="cstat-no" title="statement not covered">        this.setState({ exited: false });</span>
+      } else <span class="cstat-no" title="statement not covered">if (!nextProps.transition) {</span>
+        // Otherwise let handleHidden take care of marking exited.
+<span class="cstat-no" title="statement not covered">        this.setState({ exited: true });</span>
+      }
+    }
+  }, {
+    key: 'componentWillUpdate',
+    value: <span class="fstat-no" title="function not covered">function componentWillUpdate(nextProps) {</span>
+<span class="cstat-no" title="statement not covered">      if (!this.props.show &amp;&amp; nextProps.show) {</span>
+<span class="cstat-no" title="statement not covered">        this.checkForFocus();</span>
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: <span class="fstat-no" title="function not covered">function componentDidMount() {</span>
+<span class="cstat-no" title="statement not covered">      this._isMounted = true;</span>
+<span class="cstat-no" title="statement not covered">      if (this.props.show) {</span>
+<span class="cstat-no" title="statement not covered">        this.onShow();</span>
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: <span class="fstat-no" title="function not covered">function componentDidUpdate(prevProps) {</span>
+<span class="cstat-no" title="statement not covered">      var transition = this.props.transition;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (prevProps.show &amp;&amp; !this.props.show &amp;&amp; !transition) {</span>
+        // Otherwise handleHidden will call this.
+<span class="cstat-no" title="statement not covered">        this.onHide();</span>
+      } else <span class="cstat-no" title="statement not covered">if (!prevProps.show &amp;&amp; this.props.show) {</span>
+<span class="cstat-no" title="statement not covered">        this.onShow();</span>
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: <span class="fstat-no" title="function not covered">function componentWillUnmount() {</span>
+<span class="cstat-no" title="statement not covered">      var _props2 = this.props;</span>
+<span class="cstat-no" title="statement not covered">      var show = _props2.show;</span>
+<span class="cstat-no" title="statement not covered">      var transition = _props2.transition;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      this._isMounted = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (show || transition &amp;&amp; !this.state.exited) {</span>
+<span class="cstat-no" title="statement not covered">        this.onHide();</span>
+      }
+    }
+&nbsp;
+    //instead of a ref, which might conflict with one the parent applied.
+&nbsp;
+  }]);
+&nbsp;
+  return Modal;
+}(_react2.default.Component);
+&nbsp;
+Modal.propTypes = _extends({}, _Portal2.default.propTypes, {
+&nbsp;
+  /**
+   * Set the visibility of the Modal
+   */
+  show: _propTypes2.default.bool,
+&nbsp;
+  /**
+   * A Node, Component instance, or function that returns either. The Modal is appended to it's container element.
+   *
+   * For the sake of assistive technologies, the container should usually be the document body, so that the rest of the
+   * page content can be placed behind a virtual backdrop as well as a visual one.
+   */
+  container: _propTypes2.default.oneOfType([_componentOrElement2.default, _propTypes2.default.func]),
+&nbsp;
+  /**
+   * A callback fired when the Modal is opening.
+   */
+  onShow: _propTypes2.default.func,
+&nbsp;
+  /**
+   * A callback fired when either the backdrop is clicked, or the escape key is pressed.
+   *
+   * The `onHide` callback only signals intent from the Modal,
+   * you must actually set the `show` prop to `false` for the Modal to close.
+   */
+  onHide: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Include a backdrop component.
+   */
+  backdrop: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.oneOf(['static'])]),
+&nbsp;
+  /**
+   * A function that returns a backdrop component. Useful for custom
+   * backdrop rendering.
+   *
+   * ```js
+   *  renderBackdrop={props =&gt; &lt;MyBackdrop {...props} /&gt;}
+   * ```
+   */
+  renderBackdrop: _propTypes2.default.func,
+&nbsp;
+  /**
+   * A callback fired when the escape key, if specified in `keyboard`, is pressed.
+   */
+  onEscapeKeyUp: _propTypes2.default.func,
+&nbsp;
+  /**
+   * A callback fired when the backdrop, if specified, is clicked.
+   */
+  onBackdropClick: _propTypes2.default.func,
+&nbsp;
+  /**
+   * A style object for the backdrop component.
+   */
+  backdropStyle: _propTypes2.default.object,
+&nbsp;
+  /**
+   * A css class or classes for the backdrop component.
+   */
+  backdropClassName: _propTypes2.default.string,
+&nbsp;
+  /**
+   * A css class or set of classes applied to the modal container when the modal is open,
+   * and removed when it is closed.
+   */
+  containerClassName: _propTypes2.default.string,
+&nbsp;
+  /**
+   * Close the modal when escape key is pressed
+   */
+  keyboard: _propTypes2.default.bool,
+&nbsp;
+  /**
+   * A `&lt;Transition/&gt;` component to use for the dialog and backdrop components.
+   */
+  transition: _elementType2.default,
+&nbsp;
+  /**
+   * The `timeout` of the dialog transition if specified. This number is used to ensure that
+   * transition callbacks are always fired, even if browser transition events are canceled.
+   *
+   * See the Transition `timeout` prop for more infomation.
+   */
+  dialogTransitionTimeout: _propTypes2.default.number,
+&nbsp;
+  /**
+   * The `timeout` of the backdrop transition if specified. This number is used to
+   * ensure that transition callbacks are always fired, even if browser transition events are canceled.
+   *
+   * See the Transition `timeout` prop for more infomation.
+   */
+  backdropTransitionTimeout: _propTypes2.default.number,
+&nbsp;
+  /**
+   * When `true` The modal will automatically shift focus to itself when it opens, and
+   * replace it to the last focused element when it closes. This also
+   * works correctly with any Modal children that have the `autoFocus` prop.
+   *
+   * Generally this should never be set to `false` as it makes the Modal less
+   * accessible to assistive technologies, like screen readers.
+   */
+  autoFocus: _propTypes2.default.bool,
+&nbsp;
+  /**
+   * When `true` The modal will prevent focus from leaving the Modal while open.
+   *
+   * Generally this should never be set to `false` as it makes the Modal less
+   * accessible to assistive technologies, like screen readers.
+   */
+  enforceFocus: _propTypes2.default.bool,
+&nbsp;
+  /**
+   * When `true` The modal will restore focus to previously focused element once
+   * modal is hidden
+   */
+  restoreFocus: _propTypes2.default.bool,
+&nbsp;
+  /**
+   * Callback fired before the Modal transitions in
+   */
+  onEnter: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Callback fired as the Modal begins to transition in
+   */
+  onEntering: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Callback fired after the Modal finishes transitioning in
+   */
+  onEntered: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Callback fired right before the Modal transitions out
+   */
+  onExit: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Callback fired as the Modal begins to transition out
+   */
+  onExiting: _propTypes2.default.func,
+&nbsp;
+  /**
+   * Callback fired after the Modal finishes transitioning out
+   */
+  onExited: _propTypes2.default.func,
+&nbsp;
+  /**
+   * A ModalManager instance used to track and manage the state of open
+   * Modals. Useful when customizing how modals interact within a container
+   */
+  manager: _propTypes2.default.object.isRequired
+});
+Modal.defaultProps = {
+  show: false,
+  backdrop: true,
+  keyboard: true,
+  autoFocus: true,
+  enforceFocus: true,
+  restoreFocus: true,
+  onHide: <span class="fstat-no" title="function not covered">function onHide() {</span>},
+  manager: modalManager,
+  renderBackdrop: <span class="fstat-no" title="function not covered">function renderBackdrop(props) {</span>
+<span class="cstat-no" title="statement not covered">    return _react2.default.createElement('div', props);</span>
+  }
+};
+&nbsp;
+var _initialiseProps = <span class="fstat-no" title="function not covered">function _initialiseProps() {</span>
+<span class="cstat-no" title="statement not covered">  var _this2 = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.state = { exited: !this.props.show };</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.renderBackdrop = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var _props3 = _this2.props;</span>
+<span class="cstat-no" title="statement not covered">    var backdropStyle = _props3.backdropStyle;</span>
+<span class="cstat-no" title="statement not covered">    var backdropClassName = _props3.backdropClassName;</span>
+<span class="cstat-no" title="statement not covered">    var renderBackdrop = _props3.renderBackdrop;</span>
+<span class="cstat-no" title="statement not covered">    var Transition = _props3.transition;</span>
+<span class="cstat-no" title="statement not covered">    var backdropTransitionTimeout = _props3.backdropTransitionTimeout;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var backdropRef = <span class="fstat-no" title="function not covered">function backdropRef(ref) {</span></span>
+<span class="cstat-no" title="statement not covered">      return _this2.backdrop = ref;</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var backdrop = renderBackdrop({</span>
+      ref: backdropRef,
+      style: backdropStyle,
+      className: backdropClassName,
+      onClick: _this2.handleBackdropClick
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (Transition) {</span>
+<span class="cstat-no" title="statement not covered">      backdrop = _react2.default.createElement(</span>
+        Transition,
+        { transitionAppear: true,
+          'in': _this2.props.show,
+          timeout: backdropTransitionTimeout
+        },
+        backdrop
+      );
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return backdrop;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.onShow = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var doc = (0, _ownerDocument2.default)(_this2);</span>
+<span class="cstat-no" title="statement not covered">    var container = (0, _getContainer2.default)(_this2.props.container, doc.body);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2.props.manager.add(_this2, container, _this2.props.containerClassName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2._onDocumentKeyupListener = (0, _addEventListener2.default)(doc, 'keyup', _this2.handleDocumentKeyUp);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2._onFocusinListener = (0, _addFocusListener2.default)(_this2.enforceFocus);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2.focus();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (_this2.props.onShow) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.props.onShow();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.onHide = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    _this2.props.manager.remove(_this2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2._onDocumentKeyupListener.remove();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    _this2._onFocusinListener.remove();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (_this2.props.restoreFocus) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.restoreLastFocus();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.setMountNode = <span class="fstat-no" title="function not covered">function (ref) {</span></span>
+<span class="cstat-no" title="statement not covered">    _this2.mountNode = ref ? ref.getMountNode() : ref;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.setModalNode = <span class="fstat-no" title="function not covered">function (ref) {</span></span>
+<span class="cstat-no" title="statement not covered">    _this2.modalNode = ref;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.handleHidden = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    _this2.setState({ exited: true });</span>
+<span class="cstat-no" title="statement not covered">    _this2.onHide();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (_this2.props.onExited) {</span>
+<span class="cstat-no" title="statement not covered">      var _props4;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      (_props4 = _this2.props).onExited.apply(_props4, arguments);</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.handleBackdropClick = <span class="fstat-no" title="function not covered">function (e) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (e.target !== e.currentTarget) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (_this2.props.onBackdropClick) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.props.onBackdropClick(e);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (_this2.props.backdrop === true) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.props.onHide();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.handleDocumentKeyUp = <span class="fstat-no" title="function not covered">function (e) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (_this2.props.keyboard &amp;&amp; e.keyCode === 27 &amp;&amp; _this2.isTopModal()) {</span>
+<span class="cstat-no" title="statement not covered">      if (_this2.props.onEscapeKeyUp) {</span>
+<span class="cstat-no" title="statement not covered">        _this2.props.onEscapeKeyUp(e);</span>
+      }
+<span class="cstat-no" title="statement not covered">      _this2.props.onHide();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.checkForFocus = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    if (_inDOM2.default) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.lastFocus = (0, _activeElement2.default)();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.focus = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var autoFocus = _this2.props.autoFocus;</span>
+<span class="cstat-no" title="statement not covered">    var modalContent = _this2.getDialogElement();</span>
+<span class="cstat-no" title="statement not covered">    var current = (0, _activeElement2.default)((0, _ownerDocument2.default)(_this2));</span>
+<span class="cstat-no" title="statement not covered">    var focusInModal = current &amp;&amp; (0, _contains2.default)(modalContent, current);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (modalContent &amp;&amp; autoFocus &amp;&amp; !focusInModal) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.lastFocus = current;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (!modalContent.hasAttribute('tabIndex')) {</span>
+<span class="cstat-no" title="statement not covered">        modalContent.setAttribute('tabIndex', -1);</span>
+<span class="cstat-no" title="statement not covered">        (0, _warning2.default)(false, 'The modal content node does not accept focus. ' + 'For the benefit of assistive technologies, the tabIndex of the node is being set to "-1".');</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      modalContent.focus();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.restoreLastFocus = <span class="fstat-no" title="function not covered">function () {</span></span>
+    // Support: &lt;=IE11 doesn't support `focus()` on svg elements (RB: #917)
+<span class="cstat-no" title="statement not covered">    if (_this2.lastFocus &amp;&amp; _this2.lastFocus.focus) {</span>
+<span class="cstat-no" title="statement not covered">      _this2.lastFocus.focus();</span>
+<span class="cstat-no" title="statement not covered">      _this2.lastFocus = null;</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.enforceFocus = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var enforceFocus = _this2.props.enforceFocus;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!enforceFocus || !_this2._isMounted || !_this2.isTopModal()) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var active = (0, _activeElement2.default)((0, _ownerDocument2.default)(_this2));</span>
+<span class="cstat-no" title="statement not covered">    var modal = _this2.getDialogElement();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (modal &amp;&amp; modal !== active &amp;&amp; !(0, _contains2.default)(modal, active)) {</span>
+<span class="cstat-no" title="statement not covered">      modal.focus();</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.getDialogElement = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var node = _this2.modalNode;</span>
+<span class="cstat-no" title="statement not covered">    return node &amp;&amp; node.lastChild;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.isTopModal = <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    return _this2.props.manager.isTopModal(_this2);</span>
+  };
+};
+&nbsp;
+Modal.Manager = _ModalManager2.default;
+&nbsp;
+exports.default = Modal;
+module.exports = exports['default'];
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 25 2017 22:50:11 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
